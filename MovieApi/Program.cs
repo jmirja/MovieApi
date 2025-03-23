@@ -16,6 +16,12 @@ builder.Services.AddDbContext<MovieDbContext>(options =>
 
 var app = builder.Build();
 
+await using (var serviceScope = app.Services.CreateAsyncScope())
+await using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<MovieDbContext>())
+{
+    await dbContext.Database.EnsureCreatedAsync();
+}
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
