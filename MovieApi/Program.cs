@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using MovieManager.Endpoints;
 using MovieManager.Persistence;
 using MovieManager.Services;
 using Scalar.AspNetCore;
@@ -34,8 +35,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () => "Hello World!")
-   .Produces(200, typeof(string));
+app.MapMovieEndpoints();
 
 app.Run();
 
